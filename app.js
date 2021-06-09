@@ -1,3 +1,4 @@
+require("dotenv").config()
 const createError  = require("http-errors")
 const express      = require("express")
 const path         = require("path")
@@ -7,7 +8,7 @@ const bodyParser   = require("body-parser")
 const dbh          = require("./DatabaseHandler")
 const api          = require("./routes/api")
 const sync         = require("./sync")
-const port         = 3000
+const port         = process.env.PORT
 
 start(express())
 
@@ -30,9 +31,9 @@ async function start(app) {
         res.status(err.status || 500)
         res.json(err)
     })
-    
+
     await dbh.initialize()
-    
+
     app.listen(port, () => {
         console.log("App started")
         dataSyncLoop()
@@ -46,10 +47,9 @@ async function start(app) {
 function dataSyncLoop(interval = 1000 * 10) {
       setInterval(async () => {
         try{
-            await sync.run()           
+            await sync.run()
         }catch(error){
             console.log(error)
         }
     }, interval)
 }
-  
