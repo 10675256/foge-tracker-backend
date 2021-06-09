@@ -44,11 +44,11 @@ async function start(app) {
     })
 }
 
-function dataSyncLoop(interval = 1000 * 10) {
+function dataSyncLoop(interval = 1000 * 1) {
       setInterval(async () => {
-        try{
+        try {
             await sync.run()
-        }catch(error){
+        } catch(error) {
             console.log(error)
         }
     }, interval)
