@@ -1,6 +1,6 @@
 require("dotenv").config()
 const { MongoClient } = require("mongodb")
-const uri = encodeURI(`${process.env.DB_PROTOCOL}@${process.env.DB_SERVER}/?${process.env.DB_QUERY}`)
+const uri = encodeURI(`${process.env.DB_PROTOCOL}${process.env.DB_SERVER}/?${process.env.DB_QUERY}`)
 // const uri = encodeURI(`${process.env.DB_PROTOCOL}${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_SERVER}/?${process.env.DB_QUERY}`)
 
 class DatabaseHandler {
