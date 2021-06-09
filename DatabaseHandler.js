@@ -1,13 +1,14 @@
 require("dotenv").config()
 const { MongoClient } = require("mongodb")
-const uri = encodeURI(`${process.env.DB_PROTOCOL}${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_SERVER}/?${process.env.DB_QUERY}`)
+const uri = encodeURI(`${process.env.DB_PROTOCOL}@${process.env.DB_SERVER}/?${process.env.DB_QUERY}`)
+// const uri = encodeURI(`${process.env.DB_PROTOCOL}${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_SERVER}/?${process.env.DB_QUERY}`)
 
 class DatabaseHandler {
     constructor() {
         console.log(uri)
         this.client = new MongoClient(uri, {useNewUrlParser: true, useUnifiedTopology: true})
     }
-    
+
     initialize() {
         return new Promise((resolve, reject) => {
             this.client.connect().then(() => {
@@ -53,8 +54,8 @@ class Collection {
 
     findMany(filter){
         return this.data.find(filter)
-    } 
-    
+    }
+
     getCollection () {
         return this.data.find().toArray()
     }
